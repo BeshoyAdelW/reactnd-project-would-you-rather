@@ -6,16 +6,16 @@ class User extends PureComponent {
   render() {
     const { user } = this.props;
     return (
-      <Fragment>
-        <span>{user.name}</span>
-      </Fragment>
+        <Fragment>
+          <span>{user.name}</span>
+        </Fragment>
     );
   }
 }
 
 User.propTypes = {
   user: PropTypes.object.isRequired
-}
+};
 
 function mapStateToProps ({ users }, { id }) {
   return {
