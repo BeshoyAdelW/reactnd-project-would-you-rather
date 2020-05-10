@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import { handleInitialData }  from '../actions/shared'
-import Login from './Login';
+import Routes from './Routes'
+import NavBar from './NavBar';
 
 class App extends Component {
   componentDidMount(){
@@ -14,13 +15,14 @@ class App extends Component {
     const { notLoggedIn } = this.props;
 
     return (
-        <Router>
-          <Fragment>
-            <div className="main-container">
-              <Login notLoggedIn={notLoggedIn}/>
-            </div>
-          </Fragment>
-        </Router>
+      <Router>
+        <Fragment>
+          <div className="main-container">
+            <NavBar/>
+            <Routes notLoggedIn={notLoggedIn}/>
+          </div>
+        </Fragment>
+      </Router>
     );
   }
 }
