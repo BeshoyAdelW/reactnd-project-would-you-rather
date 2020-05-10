@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 import {unsetAuthedUser} from "../actions/authedUser";
 import {connect} from "react-redux";
 import React, { PureComponent, Fragment } from "react";
-import User from "./User"
+import User from "./User";
+import { Redirect } from 'react-router-dom'
+import Login from "./Login";
 
 class NavBar extends PureComponent {
     state = {
@@ -29,26 +31,26 @@ class NavBar extends PureComponent {
             <div>
                 <Navbar bg="primary" variant="dark" light expand="md">
                     <NavbarBrand tag={Link} to="/">Would You Rather</NavbarBrand>
-                    { authedUser &&
-                    <Fragment>
-                        <NavbarToggler onClick={this.toggle} />
-                        <Collapse isOpen={this.state.isOpen} navbar>
-                            <Nav className="ml-auto" navbar>
-                                <NavItem>
-                                    <NavLink tag={Link} to="/add">New Question</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={Link} to="/leaderboard">LeaderBoard</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <User id={authedUser}/>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink onClick={this.logout}>Logout</NavLink>
-                                </NavItem>
-                            </Nav>
-                        </Collapse>
-                    </Fragment>
+                    { authedUser ?
+                        <Fragment>
+                            <NavbarToggler onClick={this.toggle} />
+                            <Collapse isOpen={this.state.isOpen} navbar>
+                                <Nav className="ml-auto" navbar>
+                                    <NavItem>
+                                        <NavLink tag={Link} to="/add">New Question</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={Link} to="/leaderboard">LeaderBoard</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <User id={authedUser}/>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink onClick={this.logout}>Logout</NavLink>
+                                    </NavItem>
+                                </Nav>
+                            </Collapse>
+                        </Fragment> :  <Redirect to='/' exact component={Login}/>
                     }
                 </Navbar>
             </div>
