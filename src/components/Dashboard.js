@@ -3,7 +3,6 @@ import Question from './Question';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 class DashBoard extends PureComponent {
     state = {
@@ -65,11 +64,6 @@ class DashBoard extends PureComponent {
         );
     }
 }
-
-DashBoard.propTypes = {
-    answeredPolls : PropTypes.array.isRequired,
-    unansweredPolls : PropTypes.array.isRequired
-};
 
 function mapStateToProps ({ questions, users, authedUser }) {
     const user = users[authedUser];
