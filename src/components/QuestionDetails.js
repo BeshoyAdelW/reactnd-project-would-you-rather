@@ -92,32 +92,33 @@ class QuestionDetails extends PureComponent {
 QuestionDetails.propTypes = {
   question: PropTypes.object,
   questionAuthor: PropTypes.object,
-  answer: PropTypes.string.isRequired,
-  percOne: PropTypes.number.isRequired,
-  percTwo: PropTypes.number.isRequired
 };
 
-function mapStateToProps ({ questions, users, authedUser }, { match }) {
+function mapStateToProps({questions, users, authedUser}, {match}) {
   const answers = users[authedUser].answers;
   let answer, percOne, percTwo, total;
   const {id} = match.params;
+  if (id === undefined) {
+    return {}
+  }
   const question = questions[id];
-  if (question !== undefined) {
-    if (answers.hasOwnProperty(question.id)) {
-      answer = answers[question.id]
-    }
-    const questionAuthor = users[question.author];
-    total = question.optionOne.votes.length + question.optionTwo.votes.length;
-    percOne = (question.optionOne.votes.length / total) * 100;
-    percTwo = (question.optionTwo.votes.length / total) * 100;
-    return {
-      question,
-      questionAuthor,
-      answer,
-      total,
-      percOne,
-      percTwo
-    }
+  if (question === undefined) {
+    return {}
+  }
+  if (answers.hasOwnProperty(question.id)) {
+    answer = answers[question.id]
+  }
+  const questionAuthor = users[question.author];
+  total = question.optionOne.votes.length + question.optionTwo.votes.length;
+  percOne = (question.optionOne.votes.length / total) * 100;
+  percTwo = (question.optionTwo.votes.length / total) * 100;
+  return {
+    question,
+    questionAuthor,
+    answer,
+    total,
+    percOne,
+    percTwo
   }
 }
 
